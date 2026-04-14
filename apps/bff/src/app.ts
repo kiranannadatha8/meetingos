@@ -1,4 +1,5 @@
 import express, { type Express } from 'express';
+import type { HealthResponse } from '@meetingos/shared';
 
 export function createApp(): Express {
   const app = express();
@@ -6,7 +7,8 @@ export function createApp(): Express {
   app.use(express.json());
 
   app.get('/healthz', (_req, res) => {
-    res.status(200).json({ service: 'bff', status: 'ok' });
+    const body: HealthResponse = { service: 'bff', status: 'ok' };
+    res.status(200).json(body);
   });
 
   return app;
